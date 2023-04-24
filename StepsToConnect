@@ -1,0 +1,13 @@
+# launch an ec2 instance
+
+# create rds MYSQL with same VPC as in ec2
+
+# on ec2 execute below commands to connect to mysql rds
+
+ssh -i ".pem file name" -L publicPort:rdsEndpoint:rdsPort ec2-user@ec2ConnectSSH -N -f
+
+lsof -i4 -P | grep -i "listen" | grep publicPort
+
+nc -zv 127.0.0.1 publicPort [install nc if not available, sudo yum install nc]
+
+mysql -h 127.0.0.1 -P publicPort -u admin -p
